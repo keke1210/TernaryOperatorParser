@@ -10,7 +10,7 @@ Console.WriteLine(Parse(testinput, answersDict));
 
 static string Parse(string input, Dictionary<string, string> answers)
 {
-    string[] tokenExpressions = TrimCollection(input.Split(new char[] { '(', ')', '?' })); ;
+    string[] tokenExpressions = TrimCollection(input.Split(new char[] { '(', ')', '?' }));
 
     for (int i = 0; i < tokenExpressions.Length - 1; i += 2)
     {
