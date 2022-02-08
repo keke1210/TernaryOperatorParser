@@ -20,9 +20,9 @@ static string Parse(string input, Dictionary<string, string> answers)
         string[] expressions = TrimCollection(Regex.Split(mainBooleanExpression, @"\s+"));
         string[] messages = TrimCollection(messageExpression.Split(':'));
 
-        var left = expressions[0];
-        var csharpOperator = expressions[1];
-        var right = expressions[2];
+        string left = expressions[0];
+        string csharpOperator = expressions[1];
+        string right = expressions[2];
 
         // removing double quotes from answer in input expression
         var answer = string.Concat(TrimCollection(right.Split('"')));
