@@ -25,7 +25,7 @@ static string Parse(string input, Dictionary<string, string> answers)
         string right = expressions[2];
 
         // removing double quotes from answer in input expression
-        var answer = string.Concat(TrimCollection(right.Split('"')));
+        string answer = string.Concat(TrimCollection(right.Split('"')));
         
         if (csharpOperator == "==" && answers[left] == answer)
         {
