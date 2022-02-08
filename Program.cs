@@ -53,5 +53,5 @@ static string Parse(string input, Dictionary<string, string> answers)
         }
     }
 
-    throw new Exception("Couldn't parse the ternary operator");
+    throw new Exception("Couldn't parse the ternary expression");
 }
