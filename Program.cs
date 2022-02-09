@@ -43,7 +43,7 @@ static string Parse(string input, Dictionary<string, string> answers)
     throw new Exception("Couldn't parse the ternary expression");
 }
 
-static string[] TrimCollection(IEnumerable<string> collection)
+static string[] TrimCollection(string[] collection)
     => collection.Where(x => !string.IsNullOrWhiteSpace(x))
                  .Select(x => x.Trim())
                  .ToArray();
