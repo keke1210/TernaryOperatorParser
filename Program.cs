@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 
 var answersDict = new Dictionary<string, string>()
 {
@@ -21,13 +21,14 @@ static string Parse(string input, Dictionary<string, string> answers)
         string[] messages = TrimCollection(messageExpression.Split(':'));
 
         string left = expressions[0];
-        string relationalOperator = expressions[1];
+        string csharpOperator = expressions[1];
         string right = expressions[2];
 
-        // removing double quotes from answer in input expression
-        string answer = string.Concat(TrimCollection(right.Split('"')));
-        
-        if (relationalOperator == "==" && answers[left] == answer)
+        // remove double quotes and convert to decimal
+        decimal answer = ParsePossibleAnswer(right);
+
+        // check the possible answer on expression if it matches the answer provided by user
+        if (csharpOperator == "==" && ToNumber(answers[left]) == answer)
         {
             return messages[0];
         }
@@ -43,7 +44,19 @@ static string Parse(string input, Dictionary<string, string> answers)
     throw new Exception("Couldn't parse the ternary expression");
 }
 
-static string[] TrimCollection(string[] collection)
+// remove empty items and trim them
+static string[] TrimCollection(IEnumerable<string> collection)
     => collection.Where(x => !string.IsNullOrWhiteSpace(x))
                  .Select(x => x.Trim())
                  .ToArray();
+
+// converts string to decimal
+static decimal ToNumber(string input)
+{
+    decimal.TryParse(input, out var res);
+    return res;
+}
+
+// removes double quotes from string and convert to decimal
+static decimal ParsePossibleAnswer(string expression)
+    => ToNumber(string.Concat(TrimCollection(expression.Split('"'))));
