@@ -6,6 +6,9 @@ var answersDict = new Dictionary<string, string>()
     { "Token_3", "55" }
 };
 
+// Currently works only for nested ifs with only one last else. 
+// TODO: create new version so that it can be parsed to when there are more cases
+// example: (ex1) ? (ex2) : MSG2 : MSG1
 string testinput = "(Token_2 == \"2\") ? OK : (Token_3 == \"55.0\") ? OK : (Token_2 == \"99\") ? ERROR : (Token_2 == \"100\") ? WRONG : WARNING";
 Console.WriteLine(Parse(testinput, answersDict));
 
