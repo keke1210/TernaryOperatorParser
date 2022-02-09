@@ -2,10 +2,11 @@ using System.Text.RegularExpressions;
 
 var answersDict = new Dictionary<string, string>()
 {
-    { "Token_2", "99" }
+    { "Token_2", "99" },
+    { "Token_3", "55" }
 };
 
-string testinput = "(Token_2 == \"2\") ? OK : (Token_2 == \"99\") ? ERROR : (Token_2 == \"100\") ? WRONG : WARNING";
+string testinput = "(Token_2 == \"2\") ? OK : (Token_3 == \"55.0\") ? OK : (Token_2 == \"99\") ? ERROR : (Token_2 == \"100\") ? WRONG : WARNING";
 Console.WriteLine(Parse(testinput, answersDict));
 
 static string Parse(string input, Dictionary<string, string> answers)
