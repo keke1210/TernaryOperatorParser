@@ -21,13 +21,13 @@ static string Parse(string input, Dictionary<string, string> answers)
         string[] messages = TrimCollection(messageExpression.Split(':'));
 
         string left = expressions[0];
-        string csharpOperator = expressions[1];
+        string relationalOperator = expressions[1];
         string right = expressions[2];
 
         // removing double quotes from answer in input expression
         string answer = string.Concat(TrimCollection(right.Split('"')));
         
-        if (csharpOperator == "==" && answers[left] == answer)
+        if (relationalOperator == "==" && answers[left] == answer)
         {
             return messages[0];
         }
