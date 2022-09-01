@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 var answersDict = new Dictionary<string, string>()
 {
-    { "Token_2", "99" },
+    { "Token_2", "2" },
     { "Token_3", "55" }
 };
 
@@ -10,7 +10,7 @@ var answersDict = new Dictionary<string, string>()
 // TODO: create new version so that it can be parsed to when there are nested conditions
 // example: (ex1) ? (ex2) : MSG2 : MSG1
 
-string testinput = "(Token_2 == \"2\") ? OK : (Token_3 == \"55.0\") ? OK : (Token_2 == \"99\") ? ERROR : (Token_2 == \"100\") ? WRONG : WARNING";
+string testinput = "(Token_2 != \"2\") ? OK : (Token_3 == \"55.0\") ? OK : (Token_2 == \"99\") ? ERROR : (Token_2 == \"100\") ? WRONG : WARNING";
 Console.WriteLine(Parse(testinput, answersDict));
 ParseMultipleResult(testinput, answersDict).ForEach(x=>Console.WriteLine(x));
 
@@ -33,12 +33,24 @@ static string Parse(string input, Dictionary<string, string> answers)
         // remove double quotes and convert to decimal
         decimal answer = ParsePossibleAnswer(right);
 
+        decimal providedAnswer = ToNumber(answers[left]);
+
         // check the possible answer on expression if it matches the answer provided by user
-        if (csharpOperator == "==" && ToNumber(answers[left]) == answer)
+        switch (csharpOperator)
         {
-            return messages[0];
+            case "==" when providedAnswer == answer:
+                return messages[0];
+            case "!=" when providedAnswer != answer:
+                return messages[0];
+            case ">" when providedAnswer > answer:
+                return messages[0];
+            case "<" when providedAnswer < answer:
+                return messages[0];
+            case "<=" when providedAnswer <= answer:
+                return messages[0];
+            case ">=" when providedAnswer >= answer:
+                return messages[0];
         }
-        // TODO: add other operators
 
         // usually the last else
         if (messages.Length == 2)
@@ -71,12 +83,29 @@ static List<(string token, string message)> ParseMultipleResult(string input, Di
         // removing double quotes from answer in input expression
         decimal answer = ParsePossibleAnswer(right);
 
-        if (csharpOperator == "==" && ToNumber(answers[left]) == answer)
+        decimal providedAnswer = ToNumber(answers[left]);
+
+        switch (csharpOperator)
         {
-            result.Add((token: left, message: messages[0]));
-            continue;
+            case "==" when providedAnswer == answer:
+                result.Add((token: left, message: messages[0]));
+                continue;
+            case "!=" when providedAnswer != answer:
+                result.Add((token: left, message: messages[0]));
+                continue;
+            case ">" when providedAnswer > answer:
+                result.Add((token: left, message: messages[0]));
+                continue;
+            case "<" when providedAnswer < answer:
+                result.Add((token: left, message: messages[0]));
+                continue;
+            case "<=" when providedAnswer <= answer:
+                result.Add((token: left, message: messages[0]));
+                continue;
+            case ">=" when providedAnswer >= answer:
+                result.Add((token: left, message: messages[0]));
+                continue;
         }
-        // TODO: add other operators
 
         // the last else
         if (!result.Any() && messages.Length == 2)
