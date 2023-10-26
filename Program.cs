@@ -39,15 +39,10 @@ static string Parse(string input, Dictionary<string, string> answers)
         switch (csharpOperator)
         {
             case "==" when providedAnswer == answer:
-                return messages[0];
             case "!=" when providedAnswer != answer:
-                return messages[0];
             case ">" when providedAnswer > answer:
-                return messages[0];
             case "<" when providedAnswer < answer:
-                return messages[0];
             case "<=" when providedAnswer <= answer:
-                return messages[0];
             case ">=" when providedAnswer >= answer:
                 return messages[0];
         }
@@ -88,20 +83,10 @@ static List<(string token, string message)> ParseMultipleResult(string input, Di
         switch (csharpOperator)
         {
             case "==" when providedAnswer == answer:
-                result.Add((token: left, message: messages[0]));
-                continue;
             case "!=" when providedAnswer != answer:
-                result.Add((token: left, message: messages[0]));
-                continue;
             case ">" when providedAnswer > answer:
-                result.Add((token: left, message: messages[0]));
-                continue;
             case "<" when providedAnswer < answer:
-                result.Add((token: left, message: messages[0]));
-                continue;
             case "<=" when providedAnswer <= answer:
-                result.Add((token: left, message: messages[0]));
-                continue;
             case ">=" when providedAnswer >= answer:
                 result.Add((token: left, message: messages[0]));
                 continue;
